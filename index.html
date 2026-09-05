@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three Business Ideas — Concept Catalog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F1ECE0;
+    --paper-line: #D8D0BC;
+    --ink: #23262B;
+    --ink-soft: #55564f;
+    --teal: #2F6F62;
+    --teal-soft: #CFE1DA;
+    --gold: #B9862F;
+    --gold-soft: #F0DFB8;
+    --rose: #A5495B;
+    --rose-soft: #EBD3D7;
+  }
+
+  * { box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+
+  .wrap{
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 1.5rem 6rem;
+  }
+
+  header{
+    position: relative;
+    margin: 0 -1.5rem 4rem;
+    padding: 5rem 1.5rem 4.2rem;
+    background-image:
+      linear-gradient(var(--paper) 0%, rgba(241,236,224,0.6) 75%, var(--paper) 100%),
+      repeating-linear-gradient(0deg, rgba(35,38,43,0.055) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(90deg, rgba(35,38,43,0.055) 0 1px, transparent 1px 28px);
+  }
+
+  .kicker, h1, header p.sub{
+    opacity: 0;
+    transform: translateY(14px);
+    animation: riseIn 0.7s ease forwards;
+  }
+  .kicker{ animation-delay: 0.05s; }
+  h1{ animation-delay: 0.18s; }
+  header p.sub{ animation-delay: 0.32s; }
+
+  @keyframes riseIn{
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  .kicker{
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    margin: 0 0 0.9rem;
+  }
+
+  h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.1rem, 5vw, 3rem);
+    line-height: 1.08;
+    margin: 0 0 1rem;
+    max-width: 15ch;
+  }
+
+  header p.sub{
+    max-width: 48ch;
+    color: var(--ink-soft);
+    margin: 0 0 1.6rem;
+  }
+
+  .scroll-cue{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  .scroll-cue svg{
+    width: 15px; height: 15px;
+    animation: bob 1.8s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+
+  .entry{
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 2.2rem;
+    align-items: center;
+    border-top: 1px solid var(--paper-line);
+    padding: 3.2rem 1rem;
+    margin: 0 -1rem;
+    border-radius: 14px;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: transform 0.45s cubic-bezier(.2,.8,.2,1), box-shadow 0.45s ease, background 0.45s ease;
+  }
+  .entry.reveal{
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.2,.8,.2,1), box-shadow 0.45s ease, background 0.45s ease;
+  }
+  .entry:last-of-type{
+    border-bottom: 1px solid var(--paper-line);
+  }
+  .entry.reverse{
+    grid-template-columns: 1fr 230px;
+  }
+  .entry.reverse .art{ order: 2; }
+  .entry.reverse .content{ order: 1; }
+
+  .entry:hover{
+    background: color-mix(in srgb, var(--accent) 6%, var(--paper));
+    box-shadow: 0 18px 34px -22px rgba(35,38,43,0.35);
+    transform: translateY(-4px);
+  }
+
+  .art{
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 10px;
+    transition: transform 0.35s ease;
+  }
+  .entry:hover .art{ transform: scale(1.03) rotate(-0.4deg); }
+
+  .entry .code{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--accent);
+    margin: 0 0 0.5rem;
+  }
+
+  .entry h2{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.65rem;
+    margin: 0 0 0.3rem;
+    position: relative;
+    display: inline-block;
+  }
+  .entry h2::after{
+    content: "";
+    position: absolute;
+    left: 0; bottom: -3px;
+    height: 2px;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.4s ease;
+  }
+  .entry:hover h2::after{ width: 100%; }
+
+  .entry .tag{
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 0 0 1.3rem;
+  }
+
+  .field{
+    margin: 0 0 0.95rem;
+    max-width: 58ch;
+  }
+  .field:last-child{ margin-bottom: 0; }
+  .field .label{
+    margin: 0 0 0.15rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .field .text{
+    margin: 0;
+  }
+
+  .idea-1 { --accent: var(--teal); }
+  .idea-2 { --accent: var(--gold); }
+  .idea-3 { --accent: var(--rose); }
+
+  /* --- Idea 1: leaf grows, phone scan-line sweeps --- */
+  .leaf-part{ transform-origin: 45px 90px; transition: transform 0.5s ease; }
+  .entry.idea-1:hover .leaf-part{ transform: scale(1.08); }
+  .scan-line{ opacity: 0; }
+  .entry.idea-1:hover .scan-line{
+    opacity: 1;
+    animation: scanMove 1.4s ease-in-out infinite;
+  }
+  @keyframes scanMove{
+    0% { transform: translateY(0); opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { transform: translateY(74px); opacity: 0; }
+  }
+  .spark{ transition: transform 0.4s ease, opacity 0.4s ease; opacity: 0.55; }
+  .entry.idea-1:hover .spark{ opacity: 1; transform: scale(1.5); }
+
+  /* --- Idea 2: books open wider, arrow slides --- */
+  .book-a{ transition: transform 0.4s ease; transform-origin: 39px 90px; }
+  .book-b{ transition: transform 0.4s ease; transform-origin: 55px 84px; }
+  .entry.idea-2:hover .book-a{ transform: rotate(-11deg); }
+  .entry.idea-2:hover .book-b{ transform: rotate(11deg); }
+  .swap-arrow{ transition: transform 0.3s ease; }
+  .entry.idea-2:hover .swap-arrow{
+    animation: swapSlide 1s ease-in-out infinite;
+  }
+  @keyframes swapSlide{
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
+  }
+
+  /* --- Idea 3: bars grow, coin flips --- */
+  .bar{ transition: transform 0.45s ease; transform-box: fill-box; transform-origin: bottom; }
+  .entry.idea-3:hover .bar{ transform: scaleY(1.18); }
+  .coin{ transition: transform 0.5s ease; transform-box: fill-box; transform-origin: center; }
+  .entry.idea-3:hover .coin{ animation: coinSpin 1.6s ease-in-out infinite; }
+  @keyframes coinSpin{
+    0%, 100% { transform: scaleX(1); }
+    50% { transform: scaleX(0.25); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation: none !important;
+      transition: none !important;
+    }
+    .kicker, h1, header p.sub{ opacity: 1; transform: none; }
+    .entry{ opacity: 1; transform: none; }
+  }
+
+  footer{
+    margin-top: 3.5rem;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 620px){
+    .entry, .entry.reverse{
+      grid-template-columns: 1fr;
+    }
+    .entry.reverse .art{ order: 0; }
+    .entry.reverse .content{ order: 1; }
+    .art{ max-width: 280px; margin: 0 auto; }
+  }
+
+  @media (max-width: 480px){
+    header{ padding: 3.5rem 1.25rem 2.6rem; }
+    .wrap{ padding: 0 1.25rem 4rem; }
+    .entry{ padding: 2.2rem 0.5rem; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap" style="padding:0;">
+      <p class="kicker">Idea Generation Challenge — Concept Catalog</p>
+      <h1>Three ideas worth building</h1>
+      <p class="sub">A short catalog of business concepts developed through structured brainstorming, each addressing a specific, recurring problem for a clear audience. Hover an entry to see it come alive.</p>
+      <a href="#idea-1" class="scroll-cue">
+        Explore the ideas
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <div class="wrap">
+
+    <section class="entry idea-1" id="idea-1">
+      <svg class="art" viewBox="0 0 280 210" xmlns="http://www.w3.org/2000/svg">
+        <rect width="280" height="210" rx="10" fill="var(--teal-soft)"/>
+        <path d="M0 175 Q70 140 140 175 T280 175 V210 H0 Z" fill="var(--teal)" opacity="0.18"/>
+        <g class="leaf-part">
+          <path d="M40 178 C 60 140, 60 110, 45 85" stroke="var(--teal)" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M45 90 C 60 88, 72 78, 70 62" stroke="var(--teal)" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M45 90 C 30 84, 22 70, 28 55" stroke="var(--teal)" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M42 130 C 58 126, 68 116, 66 100" stroke="var(--teal)" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M42 130 C 26 124, 18 112, 24 96" stroke="var(--teal)" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </g>
+        <g transform="translate(150,60)">
+          <rect x="0" y="0" width="70" height="118" rx="14" fill="#2B2E33"/>
+          <rect x="6" y="10" width="58" height="90" rx="3" fill="#F1ECE0"/>
+          <circle cx="35" cy="108" r="5" fill="#F1ECE0"/>
+          <path d="M18 34 C18 24 28 18 35 18 C42 18 52 24 52 34 C52 50 35 58 35 58 C35 58 18 50 18 34 Z" fill="none" stroke="var(--teal)" stroke-width="2.6"/>
+          <line x1="6" y1="70" x2="30" y2="70" stroke="var(--teal)" stroke-width="3" stroke-linecap="round"/>
+          <line x1="34" y1="70" x2="64" y2="70" stroke="var(--teal)" stroke-width="3" stroke-linecap="round" opacity="0.45"/>
+          <line x1="6" y1="80" x2="45" y2="80" stroke="var(--teal)" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+          <rect class="scan-line" x="6" y="20" width="58" height="3" fill="var(--teal)" opacity="0.8"/>
+        </g>
+        <circle class="spark" cx="228" cy="46" r="3" fill="var(--teal)"/>
+        <circle class="spark" cx="242" cy="58" r="2.2" fill="var(--teal)"/>
+        <circle class="spark" cx="214" cy="60" r="2.2" fill="var(--teal)"/>
+      </svg>
+      <div class="content">
+        <p class="code">AGR · 01</p>
+        <h2>AI Crop Problem Detector</h2>
+        <p class="tag">Catch crop disease before it spreads</p>
+        <div class="field">
+          <p class="label">The problem</p>
+          <p class="text">Farmers often spot crop disease or pests too late, once yield loss has already happened — and expert help isn't always nearby or affordable.</p>
+        </div>
+        <div class="field">
+          <p class="label">The solution</p>
+          <p class="text">Photograph a leaf and an AI model flags likely diseases or pests, with treatment steps and an option to reach a local agri-expert.</p>
+        </div>
+        <div class="field">
+          <p class="label">Who it's for</p>
+          <p class="text">Small and mid-scale farmers, agricultural cooperatives, and agri-input retailers.</p>
+        </div>
+        <div class="field">
+          <p class="label">Why it can grow</p>
+          <p class="text">A recurring, season-after-season problem: free basic detection, paid expert reports, plus licensing deals with agri-input companies.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="entry idea-2 reverse">
+      <svg class="art" viewBox="0 0 280 210" xmlns="http://www.w3.org/2000/svg">
+        <rect width="280" height="210" rx="10" fill="var(--gold-soft)"/>
+        <g transform="translate(48,58)">
+          <rect x="0" y="70" width="70" height="14" rx="2" fill="var(--gold)" opacity="0.9"/>
+          <rect x="4" y="52" width="66" height="14" rx="2" fill="var(--gold)" opacity="0.7"/>
+          <rect x="0" y="34" width="70" height="14" rx="2" fill="var(--gold)" opacity="0.9"/>
+          <rect x="6" y="16" width="64" height="14" rx="2" fill="var(--gold)" opacity="0.6"/>
+        </g>
+        <g transform="translate(150,60)">
+          <rect class="book-a" x="10" y="20" width="58" height="70" rx="3" fill="#fff" stroke="var(--gold)" stroke-width="2.5" transform="rotate(-6 39 55)"/>
+          <rect class="book-b" x="26" y="14" width="58" height="70" rx="3" fill="#fff" stroke="var(--gold)" stroke-width="2.5" transform="rotate(6 55 49)"/>
+          <line x1="34" y1="34" x2="76" y2="24" stroke="var(--gold)" stroke-width="2" opacity="0.5"/>
+          <line x1="36" y1="44" x2="78" y2="34" stroke="var(--gold)" stroke-width="2" opacity="0.5"/>
+        </g>
+        <g class="swap-arrow" transform="translate(122,150)" stroke="var(--gold)" stroke-width="3" fill="none" stroke-linecap="round">
+          <path d="M0 0 C 14 -14, 34 -14, 48 0"/>
+          <path d="M40 -8 L48 0 L38 4"/>
+        </g>
+      </svg>
+      <div class="content">
+        <p class="code">CAM · 02</p>
+        <h2>Student Book Rental / Exchange</h2>
+        <p class="tag">Stop paying full price for a book you'll use once</p>
+        <div class="field">
+          <p class="label">The problem</p>
+          <p class="text">Students spend heavily on textbooks used for one semester, then the books sit unused with no easy way to rent or exchange them nearby.</p>
+        </div>
+        <div class="field">
+          <p class="label">The solution</p>
+          <p class="text">A campus platform to list books for rent, sale, or exchange, with simple chat and a safe on-campus pickup point.</p>
+        </div>
+        <div class="field">
+          <p class="label">Who it's for</p>
+          <p class="text">College and university students, starting on one campus and expanding to nearby institutions.</p>
+        </div>
+        <div class="field">
+          <p class="label">Why it can grow</p>
+          <p class="text">Cost pressure repeats every semester, so students keep coming back — and it can expand into notes exchange or student-focused ads.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="entry idea-3">
+      <svg class="art" viewBox="0 0 280 210" xmlns="http://www.w3.org/2000/svg">
+        <rect width="280" height="210" rx="10" fill="var(--rose-soft)"/>
+        <g transform="translate(40,64)">
+          <rect x="0" y="20" width="110" height="72" rx="10" fill="#fff" stroke="var(--rose)" stroke-width="3"/>
+          <path d="M0 40 H110" stroke="var(--rose)" stroke-width="3"/>
+          <rect x="78" y="48" width="30" height="20" rx="4" fill="var(--rose)"/>
+          <circle class="coin" cx="93" cy="58" r="3.4" fill="#fff"/>
+          <rect x="60" y="8" width="40" height="20" rx="4" fill="var(--rose)" opacity="0.85"/>
+        </g>
+        <g transform="translate(170,50)">
+          <line x1="0" y1="100" x2="0" y2="0" stroke="var(--rose)" stroke-width="2" opacity="0.35"/>
+          <rect class="bar" x="8" y="60" width="14" height="40" rx="2" fill="var(--rose)" opacity="0.55"/>
+          <rect class="bar" x="28" y="40" width="14" height="60" rx="2" fill="var(--rose)" opacity="0.75"/>
+          <rect class="bar" x="48" y="18" width="14" height="82" rx="2" fill="var(--rose)"/>
+        </g>
+        <circle class="coin" cx="235" cy="150" r="9" fill="none" stroke="var(--rose)" stroke-width="2.5"/>
+        <circle class="coin" cx="248" cy="162" r="6" fill="none" stroke="var(--rose)" stroke-width="2.2"/>
+      </svg>
+      <div class="content">
+        <p class="code">FIN · 03</p>
+        <h2>Student Budget &amp; Expense App</h2>
+        <p class="tag">Money tools built for irregular student income</p>
+        <div class="field">
+          <p class="label">The problem</p>
+          <p class="text">Students manage money for the first time with no planning experience — overspending early and losing track of where it goes.</p>
+        </div>
+        <div class="field">
+          <p class="label">The solution</p>
+          <p class="text">A lightweight app for quick expense logging, spend breakdowns, low-balance alerts, and budget goals tied to the semester cycle.</p>
+        </div>
+        <div class="field">
+          <p class="label">Who it's for</p>
+          <p class="text">College and university students with limited, irregular income, especially first-time hostel or PG residents.</p>
+        </div>
+        <div class="field">
+          <p class="label">Why it can grow</p>
+          <p class="text">An underserved niche versus finance apps built for salaried adults — cheap to scale, with room for student discount or card partnerships.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Built as part of the Idea Generation Challenge assignment.
+    </footer>
+  </div>
+
+  <script>
+    var entries = document.querySelectorAll('.entry');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      entries.forEach(function(el){ el.classList.add('reveal'); });
+    } else {
+      var observer = new IntersectionObserver(function(items){
+        items.forEach(function(item){
+          if (item.isIntersecting) {
+            item.target.classList.add('reveal');
+            observer.unobserve(item.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      entries.forEach(function(el){ observer.observe(el); });
+    }
+  </script>
+</body>
+</html>
